@@ -64,17 +64,7 @@ client.on("ready", async () => {
         currentLargeImageIndex = (currentLargeImageIndex + 1) % largeImages.length;
         currentStateIndex = (currentStateIndex + 1) % stateTexts.length;
         currentnameTextsIndex = (currentnameTextsIndex + 1) % nameTexts.length;
-
-        // Change settings from the list every second
-        if (currentIndex < settingsList.length) {
-            const currentSetting = settingsList[currentIndex];
-            changeSettings(currentSetting);
-            currentIndex++;
-        } else {
-            // Reset the index when all settings are changed
-            currentIndex = 0;
-        }
-    }, 2500); // Change large image and state text every 2.5 seconds
+    }, 2500); // Change large image and state text every 1 second
 });
 
 function getCurrentDate() {
