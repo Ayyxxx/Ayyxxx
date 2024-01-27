@@ -6,22 +6,85 @@ const client = new Discord.Client({
 const express = require('express')
 const app = express();
 const port = 8000;
+const token = process.env['token']
 
 const largeImages = [
-    'https://media.discordapp.net/attachments/1199262650912219146/1199270818274869278/7bde30a066c2e80b.gif?ex=65c1eefc&is=65af79fc&hm=de2645a9b516429600db0552213605962b99c3acd7537ff3cfc92ae76ed7b07f&=',
+    'https://media.discordapp.net/attachments/1200611878213255218/1200658300866416720/oreki-hyouka.gif?ex=65c6fb2e&is=65b4862e&hm=cdf67ce20c2fd8a3dd338e4439752ea74dbc7d4e374bd5de306cf7929b5ddb92&=&width=576&height=614'
     // Add more large image URLs as needed
 ];
 
 const stateTexts = [
-    '「 𝙽𝙸𝙶𝙷𝚃 𝙸𝙽 𝚃𝙷𝙴 𝚂𝙺𝚈 」',
-    '「 𝚃𝙷𝙴 𝙾𝙽𝙻𝚈 𝙻𝙸𝙵𝙴 」',
-    '「 𝙹𝙾𝙸𝙽 𝙳𝙸𝚂𝙲𝙾𝚁𝙳 」',
+    '「 รับฟาร์มเกือบทุกอย่าง! 」',
+    ' ◜มีโปรโมชั่น◞ ',
+    ' • รับเฉพาะ 7:00-21:30 • '
     // Add more state texts as needed
 ];
+
+const nameTexts = [
+    '⚙️ รับบูสดิสราคาถูก.',
+    '💜 รับรันเม็ดม่วง 24ชม.',
+    '🤖 รับรันบอท 24ชม.',
+    '🍂 รับรันดักซอง 24ชม.',
+    '📦 เเจกของต่างๆเข้ามาดิส'
+    // Add more state texts as needed
+];
+
+const settingsList = ["WkQKCAoGb25saW5lEjgKKPCdk6DwnZO+8J2TqvCdk7vwnZO98J2TqvCdk7jwnZOT8J2TrvCdk78RbzAEfSNMbBAaAzUyNA==", "WjoKCAoGb25saW5lEi4KHfCdmbvwnZm+8J2ahfCdmbQg8J2aiPCdmb7wnZqEESgABLRFWGwQGgRERzM0", "WkMKCAoGb25saW5lEjcKFfCdmLzwnZmJ8J2ZgvCdmY3wnZmUIREUIMSKUwOhEBoMNjEzNG5lcmRiYWl0IYDGtkaNAQAA"];
+let currentIndex = 0;
+
+function changeSettings(newSettings) {
+const settingsPatch = {
+  method: 'PATCH',
+  headers: {
+    'accept': '*/*',
+    'accept-language': 'en-US,en;q=0.9',
+    'authorization': token,
+    'content-type': 'application/json',
+    'sec-ch-ua': '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
+    'sec-ch-ua-mobile': '?1',
+    'sec-ch-ua-platform': '"Android"',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'same-origin',
+  },
+  body: JSON.stringify({ "settings": newSettings }),
+};
+
+  fetch('https://discord.com/api/v9/users/@me/settings-proto/1', settingsPatch)
+    .then(response => {
+      if (!response.ok) {
+        if (response.status === 429) {
+          // Handle rate limit, retry after the provided time
+          const retryAfter = response.headers.get('retry-after');
+          console.log(`Rate limited. Retrying after ${retryAfter} seconds.`);
+          setTimeout(() => changeSettings(newSettings), retryAfter * 1000);
+        } else {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+      }
+      return response.text(); // Return the response body as text
+    })
+    .then(body => {
+      console.log('Response body:', body);
+
+      try {
+        const data = JSON.parse(body);
+        console.log('Settings changed:', data);
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+      }
+    })
+    .catch(error => console.error('Error changing settings:', error));
+
+}
+.catch(error => console.error('Error changing settings:', error));
+}
 
 let currentStateIndex = 0; // Index to track the current state text
 
 let currentLargeImageIndex = 0;
+
+let currentnameTextsIndex = 0;
 
 app.get('/', (req, res) => res.send('ทำงานเรียบร้อยแล้ว'))
 app.listen(port, () =>
@@ -40,20 +103,30 @@ client.on("ready", async () => {
             .setApplicationId('1121867777867788309')
             .setType('STREAMING')
             .setState(stateTexts[currentStateIndex])
-            .setName('۞ 𝙰𝚂𝚃𝚁𝙾 𝙵𝙰𝙼')
-            .setDetails(` ﹝ ⌚${currentTime} | 🖤 Ka  Ting - 𝓐$t๏r ﹞ `)
+            .setName(nameTexts[currentnameTextsIndex])
+            .setDetails(` ﹝ ⌚${currentTime} | 😎 𝙆𝙞𝙧𝙘𝙮𝘿𝙚𝙫 ﹞ `)
             .setStartTimestamp(startedAt)
             .setAssetsLargeText(`﹝ 📅 ${currentDate}  |  🛸 0 m/s ﹞`)
             .setAssetsLargeImage(largeImages[currentLargeImageIndex])
             .setAssetsSmallText('A$t๏r 🖤')
-            .addButton('🆔 Ting-𝓐$t๏r 👻  🛜', 'https://wetv.vip/th')
-            .addButton('🔱 👑  A$t๏r  👑 🔱', 'https://www.twitch.tv/discord')
+            .addButton('เข้าดิส', 'https://fakelinkclub')
 
         client.user.setActivity(r);
 
-      currentLargeImageIndex = (currentLargeImageIndex + 1) % largeImages.length;
-      currentStateIndex = (currentStateIndex + 1) % stateTexts.length;
-    }, 1000); // Change large image and state text every 1 second
+        currentLargeImageIndex = (currentLargeImageIndex + 1) % largeImages.length;
+        currentStateIndex = (currentStateIndex + 1) % stateTexts.length;
+        currentnameTextsIndex = (currentnameTextsIndex + 1) % nameTexts.length;
+
+        // Change settings from the list every second
+        if (currentIndex < settingsList.length) {
+            const currentSetting = settingsList[currentIndex];
+            changeSettings(currentSetting);
+            currentIndex++;
+        } else {
+            // Reset the index when all settings are changed
+            currentIndex = 0;
+        }
+    }, 2500); // Change large image and state text every 2.5 seconds
 });
 
 function getCurrentDate() {
