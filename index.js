@@ -21,64 +21,12 @@ const stateTexts = [
 ];
 
 const nameTexts = [
-    '⚙️ รับบูสดิสราคาถูก.',
-    '💜 รับรันเม็ดม่วง 24ชม.',
-    '🤖 รับรันบอท 24ชม.',
-    '🍂 รับรันดักซอง 24ชม.',
-    '📦 เเจกของต่างๆเข้ามาดิส'
+    '「 รับฟาร์มเกือบทุกอย่าง! 」',
+    ' ◜มีโปรโมชั่น◞ ',
+    ' • รับเฉพาะ 7:00-21:30 • '
     // Add more state texts as needed
 ];
 
-const settingsList = ["WkQKCAoGb25saW5lEjgKKPCdk6DwnZO+8J2TqvCdk7vwnZO98J2TqvCdk7jwnZOT8J2TrvCdk78RbzAEfSNMbBAaAzUyNA==", "WjoKCAoGb25saW5lEi4KHfCdmbvwnZm+8J2ahfCdmbQg8J2aiPCdmb7wnZqEESgABLRFWGwQGgRERzM0", "WkMKCAoGb25saW5lEjcKFfCdmLzwnZmJ8J2ZgvCdmY3wnZmUIREUIMSKUwOhEBoMNjEzNG5lcmRiYWl0IYDGtkaNAQAA"];
-let currentIndex = 0;
-
-function changeSettings(newSettings) {
-const settingsPatch = {
-  method: 'PATCH',
-  headers: {
-    'accept': '*/*',
-    'accept-language': 'en-US,en;q=0.9',
-    'authorization': 'token',
-    'content-type': 'application/json',
-    'sec-ch-ua': '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
-    'sec-ch-ua-mobile': '?1',
-    'sec-ch-ua-platform': '"Android"',
-    'sec-fetch-dest': 'empty',
-    'sec-fetch-mode': 'cors',
-    'sec-fetch-site': 'same-origin',
-  },
-  body: JSON.stringify({ "settings": newSettings }),
-};
-
-  fetch('https://discord.com/api/v9/users/@me/settings-proto/1', settingsPatch)
-    .then(response => {
-      if (!response.ok) {
-        if (response.status === 429) {
-          // Handle rate limit, retry after the provided time
-          const retryAfter = response.headers.get('retry-after');
-          console.log(`Rate limited. Retrying after ${retryAfter} seconds.`);
-          setTimeout(() => changeSettings(newSettings), retryAfter * 1000);
-        } else {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-      }
-      return response.text(); // Return the response body as text
-    })
-    .then(body => {
-      console.log('Response body:', body);
-
-      try {
-        const data = JSON.parse(body);
-        console.log('Settings changed:', data);
-      } catch (error) {
-        console.error('Error parsing JSON:', error);
-      }
-    })
-    .catch(error => console.error('Error changing settings:', error));
-
-}
-.catch(error => console.error('Error changing settings:', error));
-}
 
 let currentStateIndex = 0; // Index to track the current state text
 
