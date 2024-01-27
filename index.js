@@ -57,7 +57,7 @@ client.on("ready", async () => {
             .setAssetsLargeText(`﹝ 📅 ${currentDate}  |  🛸 0 m/s ﹞`)
             .setAssetsLargeImage(largeImages[currentLargeImageIndex])
             .setAssetsSmallText('A$t๏r 🖤')
-            .addButton('เข้าดิส', 'https://fakelinkclub')
+            .addButton('ดิสร้าน', 'https://discord.gg/4zFn3euv')
 
         client.user.setActivity(r);
 
