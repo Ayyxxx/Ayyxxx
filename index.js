@@ -38,7 +38,7 @@ const settingsPatch = {
   headers: {
     'accept': '*/*',
     'accept-language': 'en-US,en;q=0.9',
-    'authorization': token,
+    'authorization': 'token',
     'content-type': 'application/json',
     'sec-ch-ua': '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
     'sec-ch-ua-mobile': '?1',
