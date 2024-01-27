@@ -52,7 +52,7 @@ client.on("ready", async () => {
             .setType('STREAMING')
             .setState(stateTexts[currentStateIndex])
             .setName(nameTexts[currentnameTextsIndex])
-            .setDetails(` ﹝ ⌚${currentTime} | 😎 𝙆𝙞𝙧𝙘𝙮𝘿𝙚𝙫 ﹞ `)
+            .setDetails(` ﹝ ⌚${currentTime} | 🍥 ${client.user.username} ﹞ `)
             .setStartTimestamp(startedAt)
             .setAssetsLargeText(`﹝ 📅 ${currentDate}  |  🛸 0 m/s ﹞`)
             .setAssetsLargeImage(largeImages[currentLargeImageIndex])
