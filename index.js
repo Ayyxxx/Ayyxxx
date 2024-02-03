@@ -10,7 +10,7 @@ const token = process.env['token']
 
 const largeImages = [
     'https://media.discordapp.net/attachments/1200611878213255218/1200658300866416720/oreki-hyouka.gif?ex=65c6fb2e&is=65b4862e&hm=cdf67ce20c2fd8a3dd338e4439752ea74dbc7d4e374bd5de306cf7929b5ddb92&=&width=576&height=614'
-    'https://media.discordapp.net/attachments/1203321276320579605/1203330064473661501/standard.gif?ex=65d0b374&is=65be3e74&hm=6027c71616340114822766f33e4cf23959a34847e6158b2d66bb5069f983c89b&='
+    'https://media.discordapp.net/attachments/1201892625008037981/1203332655509413998/aaaaaaaa.gif?ex=65d0b5dd&is=65be40dd&hm=3b8f63f7ab215bd43ddfd6bf94d900d559562d9539be4f61e3c61686e2bdc944&='
     'https://media.discordapp.net/attachments/1203321276320579605/1203330064884830218/venusxcv-aesthetic.gif?ex=65d0b374&is=65be3e74&hm=0e5ec9f902627a1497aa1ba1c306d8909bce793514df6582d5417155cf7250cf&='
     // Add more large image URLs as needed
 ];
