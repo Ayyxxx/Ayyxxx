@@ -9,23 +9,21 @@ const port = 8000;
 const token = process.env['token']
 
 const largeImages = [
-    'https://media.discordapp.net/attachments/1200611878213255218/1200658300866416720/oreki-hyouka.gif?ex=65c6fb2e&is=65b4862e&hm=cdf67ce20c2fd8a3dd338e4439752ea74dbc7d4e374bd5de306cf7929b5ddb92&=&width=576&height=614',
-    'https://media.discordapp.net/attachments/1203321276320579605/1203330064884830218/venusxcv-aesthetic.gif?ex=65d0b374&is=65be3e74&hm=0e5ec9f902627a1497aa1ba1c306d8909bce793514df6582d5417155cf7250cf&=',
-    'https://media.discordapp.net/attachments/1201892625008037981/1203332655509413998/aaaaaaaa.gif?ex=65d0b5dd&is=65be40dd&hm=3b8f63f7ab215bd43ddfd6bf94d900d559562d9539be4f61e3c61686e2bdc944&='
+    'https://media.discordapp.net/attachments/1225803385979011192/1226077887086592000/asdasdad.gif?ex=66237503&is=66110003&hm=f0573264381a9d41be24be639324cd7f994c92610598df71c3fccbed7b31daba&=&width=345&height=613'
     // Add more large image URLs as needed
 ];
 
 const stateTexts = [
-    '「 รับฟาร์มเกือบทุกอย่าง! 」',
-    ' ◜มีโปรโมชั่น◞ ',
-    ' • รับทุกเวลาถ้าตอบ • '
+    '「 ฉันเป็นเก! 」',
+    ' ◜เเม้มอ้ายก็◞ ',
+    ' • ตอกกันเถอะ • '
     // Add more state texts as needed
 ];
 
 const nameTexts = [
-    '「 รับฟาร์มเกือบทุกอย่าง! 」',
-    ' ◜มีโปรโมชั่น◞ ',
-    ' • รับทุกเวลาถ้าตอบ • '
+    '「 ฉันเป็นเก! 」',
+    ' ◜เเม้มอ้ายก็◞ ',
+    ' • ตอกกันเถอะ • '
     // Add more state texts as needed
 ];
 
@@ -54,7 +52,7 @@ client.on("ready", async () => {
             .setType('STREAMING')
             .setState(stateTexts[currentStateIndex])
             .setName(nameTexts[currentnameTextsIndex])
-            .setDetails(` ﹝ ⌚${currentTime} | 🍥 ${client.user.username} ﹞ `)
+            .setDetails(` ﹝ ⌚${currentTime} | ❤️‍🔥 ${client.user.username} ﹞ `)
             .setStartTimestamp(startedAt)
             .setAssetsLargeText(`﹝ 📅 ${currentDate}  |  🛸 0 m/s ﹞`)
             .setAssetsLargeImage(largeImages[currentLargeImageIndex])
@@ -66,7 +64,7 @@ client.on("ready", async () => {
         currentLargeImageIndex = (currentLargeImageIndex + 1) % largeImages.length;
         currentStateIndex = (currentStateIndex + 1) % stateTexts.length;
         currentnameTextsIndex = (currentnameTextsIndex + 1) % nameTexts.length;
-    }, 2500); // Change large image and state text every 1 second
+    }, 4000); // Change large image and state text every 1 second
 });
 
 function getCurrentDate() {
